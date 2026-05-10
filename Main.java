@@ -3,10 +3,11 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        // Initialization of  DatabaseManager to establish the database connection and scanner 
         DatabaseManager dbManager = new DatabaseManager();
         LoginManager loginManager = new LoginManager(dbManager);
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         int choice = 0;
 
         do {
@@ -17,17 +18,18 @@ public class Main {
             System.out.print("Select an option (1-3): ");
 
             try {
-                choice = Integer.parseInt(scanner.nextLine().trim());
+                choice = Integer.parseInt(input.nextLine().trim());
             } catch (NumberFormatException e) {
                 choice = 0;
             }
 
+            // switch case user's choice
             switch (choice) {
                 case 1:
-                    loginManager.addUserCredential(scanner);
+                    loginManager.addUserCredential(input);
                     break;
                 case 2:
-                    loginManager.startLoginProcess(scanner);
+                    loginManager.startLoginProcess(input);
                     break;
                 case 3:
                     System.out.println("Exiting program. Goodbye!");
@@ -39,6 +41,6 @@ public class Main {
         } while (choice != 3);
 
         dbManager.close();
-        scanner.close();
+        input.close();
     }
 }

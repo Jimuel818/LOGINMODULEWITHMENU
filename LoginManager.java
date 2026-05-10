@@ -19,14 +19,16 @@ public class LoginManager {
         return dbManager.authenticateUser(username, password);
     }
 
-    public void startLoginProcess(Scanner scanner){
+    // Handles the login flow with a limited number of attempts  
+    // and  Loop until max attempts are reached
+    public void startLoginProcess(Scanner input){
         int attemptCount = 0;
         while (attemptCount < MAX_ATTEMPTS){
             System.out.print("Enter username: ");
-            String inputUsername = scanner.nextLine();
+            String inputUsername = input.nextLine();
 
             System.out.print("Enter password: ");
-            String inputPassword = scanner.nextLine();
+            String inputPassword = input.nextLine();
 
             if (login(inputUsername, inputPassword)){
                 System.out.println("Login successful!");
@@ -42,13 +44,15 @@ public class LoginManager {
             }
         }
     }
+    
+    //This block code input for new credentials and saves them to the database
 
-    public void addUserCredential(Scanner scanner){
+    public void addUserCredential(Scanner input){
         System.out.print("Enter new username: ");
-        String newUsername = scanner.nextLine();
+        String newUsername = input.nextLine();
 
         System.out.print("Enter new password: ");
-        String newPassword = scanner.nextLine();
+        String newPassword = input.nextLine();
 
         if (dbManager.addUser(newUsername, newPassword)){
             System.out.println("User successfully added.");
